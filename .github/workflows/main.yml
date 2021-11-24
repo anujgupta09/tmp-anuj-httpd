@@ -7,8 +7,6 @@ on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -24,13 +22,15 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: docker login 
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+        
+      # Runs a set of commands using the runners shell
+      - name: docker build command frontend
+        run: |
+          docker build -t anujdocker9799/anujhttpd9799:latest .
+          docker push anujdocker9799/anujhttpd9799:latest
