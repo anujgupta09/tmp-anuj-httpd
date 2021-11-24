@@ -36,3 +36,16 @@ jobs:
         run: |
           docker build -t anujdocker9799/anujhttpd9799:latest .
           docker push anujdocker9799/anujhttpd9799:latest
+          
+      - name: installing aws cli
+        id: install-aws-cli
+        uses: unfor19/install-aws-cli-action@v1
+        with:
+            version: 2     # default
+            verbose: false # default
+            arch: amd64    # allowed values: amd64, arm64
+            
+      - run: aws --version
+        shell: bash
+
+       
