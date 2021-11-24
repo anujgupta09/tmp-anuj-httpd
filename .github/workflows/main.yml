@@ -22,6 +22,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - name: print secrets
+        run: echo $secrets.DOCKER_USER
       - name: docker login 
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
