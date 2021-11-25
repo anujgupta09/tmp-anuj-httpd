@@ -78,7 +78,7 @@ jobs:
         
     - name: forcing new deployment
       run: |
-      aws ecs update-service --cluster LineupX --service anujhttpd-service --force-new-deployment
+        aws ecs update-service --cluster LineupX --service anujhttpd-service --force-new-deployment
       
 
  
